@@ -1,12 +1,26 @@
-import { Feather } from '@expo/vector-icons';
-import React from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { Feather } from "@expo/vector-icons";
+import React, { FC } from "react";
+import { StyleSheet, TextInput, View } from "react-native";
 
-const SearchBar = () => {
+interface IProp {
+  term: string;
+  onTermChange: (t: string) => void;
+  onTermSubmit: () => void;
+}
+
+const SearchBar: FC<IProp> = ({ term, onTermChange, onTermSubmit }) => {
   return (
     <View style={styles.backgroundStyle}>
       <Feather name="search" style={styles.iconStyle} />
-      <TextInput style={styles.inputStyle} placeholder="Search" />
+      <TextInput
+        style={styles.inputStyle}
+        value={term}
+        autoCapitalize={"none"}
+        autoCorrect={false}
+        onChangeText={onTermChange}
+        placeholder="Search"
+        onEndEditing={onTermSubmit}
+      />
     </View>
   );
 };
