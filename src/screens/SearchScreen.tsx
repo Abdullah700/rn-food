@@ -8,22 +8,26 @@ import { IBusiness } from "../interfaces/IBusiness";
 const SearchScreen = () => {
   const [term, setTerm] = useState<string>("");
   const [results, setResults] = useState<IBusiness[]>([]);
+  const [errMsg, setErrMsg] = useState<string>("");
 
   const searchApi = async (): Promise<void> => {
-    const response = await yelp.get("/search", {
-      params: {
-        limit: 50,
-      },
-    });
-    setResults(response.data.businesses);
+    try {
+      const response = await yelp.get("/search", {
+        params: {
+          limit: 50,
+          term,
+          location: "san jose",
+        },
+      });
+      setResults(response.data.businesses);
+    } catch (err) {
+      setErrMsg("Something went wrong");
+    }
   };
   return (
     <View>
-      <SearchBar
-        term={term}
-        onTermChange={(t: string) => setTerm(t)}
-        onTermSubmit={() => console.log("submitted")}
-      />
+      <SearchBar term={term} onTermChange={setTerm} onTermSubmit={searchApi} />
+      {!!errMsg && <Text style={{ color: "red" }}>{errMsg}</Text>}
       <Text>{results.length} has been found</Text>
     </View>
   );

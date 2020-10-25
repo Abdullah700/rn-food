@@ -20,6 +20,7 @@ const SearchBar: FC<IProp> = ({ term, onTermChange, onTermSubmit }) => {
         onChangeText={onTermChange}
         placeholder="Search"
         onEndEditing={onTermSubmit}
+        onSubmitEditing={onTermSubmit}
       />
     </View>
   );
