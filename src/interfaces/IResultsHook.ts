@@ -1,3 +1,7 @@
-import {IBusiness} from "./IBusiness";
+import { IBusiness } from "./IBusiness";
 
-export type IResultsHook = () => [(searchTerm: string) => Promise<void>, IBusiness[], string]
+export type IResultsHook = () => [
+  { searchApi: (searchTerm: string) => Promise<void> },
+  { results: IBusiness[] },
+  { errMsg: string }
+];
