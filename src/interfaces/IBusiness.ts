@@ -1,23 +1,5 @@
-export interface IBusiness {
-  id: string;
-  alias: string;
-  name: string;
-  image_url: string;
-  is_claimed: boolean;
-  is_closed: boolean;
-  url: string;
-  phone: string;
-  display_phone: string;
-  review_count: number;
-  categories: Category[];
-  rating: number;
-  location: Location;
-  coordinates: Coordinates;
-  photos: string[];
-  price: string;
-  hours: Hour[];
-  transactions: any[];
-  special_hours: SpecialHour[];
+export interface IBusinessRes {
+  businesses: IBusiness[];
 }
 
 interface Category {
@@ -61,4 +43,26 @@ interface SpecialHour {
   start: string;
   end: string;
   is_overnight: boolean;
+}
+
+export interface IBusiness {
+  id: string;
+  alias: string;
+  name: string;
+  image_url: string;
+  is_claimed: boolean;
+  is_closed: boolean;
+  url: string;
+  phone: string;
+  display_phone: string;
+  review_count: number;
+  categories: Category[];
+  rating: number;
+  location: Location;
+  coordinates: Coordinates;
+  photos: string[];
+  price: string;
+  hours: Hour[];
+  transactions: any[];
+  special_hours: SpecialHour[];
 }
