@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {ScrollView, StyleSheet, Text, View} from "react-native";
 
 import SearchBar from "../components/SearchBar";
 import useResults from "../hooks/useResults";
@@ -15,24 +15,25 @@ const SearchScreen: FC = () => {
     });
   };
   return (
-    <View>
+    <>
       <SearchBar
         term={term}
         onTermChange={setTerm}
         onTermSubmit={() => searchApi(term)}
       />
       {!!errMsg && <Text style={{ color: "red" }}>{errMsg}</Text>}
-      <Text>{results.length} has been found</Text>
-      <ResultsList
-        results={filterResultsByPrice("$")}
-        title={"Cost Effective"}
-      />
-      <ResultsList results={filterResultsByPrice("$$")} title={"Bit Pricer"} />
-      <ResultsList
-        results={filterResultsByPrice("$$$")}
-        title={"Big Spender"}
-      />
-    </View>
+      <ScrollView>
+          <ResultsList
+              results={filterResultsByPrice("$")}
+              title={"Cost Effective"}
+          />
+          <ResultsList results={filterResultsByPrice("$$")} title={"Bit Pricer"} />
+          <ResultsList
+              results={filterResultsByPrice("$$$")}
+              title={"Big Spender"}
+          />
+      </ScrollView>
+    </>
   );
 };
 
