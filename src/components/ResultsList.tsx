@@ -1,15 +1,23 @@
 import { Feather } from "@expo/vector-icons";
 import React, { FC } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { IBusiness } from "../interfaces/IBusiness";
 import ResultsDetail from "./ResultsDetail";
+import { NavigationScreenProp } from "react-navigation";
 
 interface IProp {
   title: string;
   results: IBusiness[];
+  navigation: NavigationScreenProp<any>;
 }
 
-const ResultsList: FC<IProp> = ({ title, results }) => {
+const ResultsList: FC<IProp> = ({ title, results, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}> {title} </Text>
@@ -19,7 +27,13 @@ const ResultsList: FC<IProp> = ({ title, results }) => {
         showsHorizontalScrollIndicator={false}
         keyExtractor={(result) => result.id}
         renderItem={({ item }) => {
-          return <ResultsDetail result={item} />;
+          return (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ResultsShow")}
+            >
+              <ResultsDetail result={item} />
+            </TouchableOpacity>
+          );
         }}
       />
     </View>

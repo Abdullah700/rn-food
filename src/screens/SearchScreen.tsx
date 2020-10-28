@@ -1,12 +1,13 @@
 import React, { FC, useState } from "react";
-import {ScrollView, StyleSheet, Text, View} from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import SearchBar from "../components/SearchBar";
 import useResults from "../hooks/useResults";
 import ResultsList from "../components/ResultsList";
 import { IBusiness } from "../interfaces/IBusiness";
+import { SceneViewProps } from "react-navigation";
 
-const SearchScreen: FC = () => {
+const SearchScreen: FC<SceneViewProps> = ({ navigation }) => {
   const [term, setTerm] = useState<string>("");
   const [{ searchApi }, { results }, { errMsg }] = useResults();
   const filterResultsByPrice = (price: string): IBusiness[] => {
@@ -23,15 +24,21 @@ const SearchScreen: FC = () => {
       />
       {!!errMsg && <Text style={{ color: "red" }}>{errMsg}</Text>}
       <ScrollView>
-          <ResultsList
-              results={filterResultsByPrice("$")}
-              title={"Cost Effective"}
-          />
-          <ResultsList results={filterResultsByPrice("$$")} title={"Bit Pricer"} />
-          <ResultsList
-              results={filterResultsByPrice("$$$")}
-              title={"Big Spender"}
-          />
+        <ResultsList
+          results={filterResultsByPrice("$")}
+          title={"Cost Effective"}
+          navigation={navigation}
+        />
+        <ResultsList
+          results={filterResultsByPrice("$$")}
+          title={"Bit Pricer"}
+          navigation={navigation}
+        />
+        <ResultsList
+          results={filterResultsByPrice("$$$")}
+          title={"Big Spender"}
+          navigation={navigation}
+        />
       </ScrollView>
     </>
   );
