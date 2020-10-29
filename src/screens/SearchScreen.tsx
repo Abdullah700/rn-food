@@ -5,9 +5,14 @@ import SearchBar from "../components/SearchBar";
 import useResults from "../hooks/useResults";
 import ResultsList from "../components/ResultsList";
 import { IBusiness } from "../interfaces/IBusiness";
-import { SceneViewProps } from "react-navigation";
+import {
+  NavigationInjectedProps,
+  NavigationScreenConfigProps,
+  NavigationScreenOptionsGetter,
+  SceneViewProps,
+} from "react-navigation";
 
-const SearchScreen: FC<SceneViewProps> = ({ navigation }) => {
+const SearchScreen: FC<NavigationInjectedProps> = ({ navigation }) => {
   const [term, setTerm] = useState<string>("");
   const [{ searchApi }, { results }, { errMsg }] = useResults();
   const filterResultsByPrice = (price: string): IBusiness[] => {

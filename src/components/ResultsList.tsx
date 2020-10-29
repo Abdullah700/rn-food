@@ -9,7 +9,11 @@ import {
 } from "react-native";
 import { IBusiness } from "../interfaces/IBusiness";
 import ResultsDetail from "./ResultsDetail";
-import { NavigationScreenProp } from "react-navigation";
+import {
+  NavigationProp,
+  NavigationScreenProp,
+  SceneViewProps,
+} from "react-navigation";
 
 interface IProp {
   title: string;
